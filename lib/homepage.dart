@@ -25,14 +25,14 @@ class _HomePageState extends State<HomePage> {
   int score = 0;
   FirebaseFirestore db = FirebaseFirestore.instance;
 
-  Future<String> getScore() async {
-    await db.collection("score").snapshots().listen((snapshot) {
-      for (DocumentSnapshot doc in snapshot.docs) {
-        var score = doc.data();
-        return ""+score;
-      }
-    });
-  }
+  // Future<String> getScore() async {
+  //   await db.collection("score").snapshots().listen((snapshot) {
+  //     for (DocumentSnapshot doc in snapshot.docs) {
+  //       var score = doc.data();
+  //       return ""+score;
+  //     }
+  //   });
+  // }
 
   void startGame() {
     Timer.periodic(const Duration(seconds: 1), (timer) {

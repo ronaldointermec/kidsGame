@@ -15,11 +15,11 @@ Future<void> main() async {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   // recupera todos os documentos e refaz a consulta a cada novo registro
-  db.collection("users").snapshots().listen((snapshot) {
-    for (DocumentSnapshot doc in snapshot.docs) {
-      print(doc.data());
-    }
-  });
+  // db.collection("users").snapshots().listen((snapshot) {
+  //   for (DocumentSnapshot doc in snapshot.docs) {
+  //     print(doc.data());
+  //   }
+  // });
 
   runApp(const MyApp());
 }
