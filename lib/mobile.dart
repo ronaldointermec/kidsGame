@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:game/controller.dart';
 import 'package:game/sharedPreferencesHelper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'ScannerManager.dart';
+import 'scannerManager.dart';
 
 class Mobile extends StatefulWidget {
   const Mobile({Key? key}) : super(key: key);
@@ -13,27 +12,19 @@ class Mobile extends StatefulWidget {
 }
 
 class _MobileState extends State<Mobile> {
-  // configuração scanner
   late ScannerManager scanner;
   bool hideBer = false;
-
-  // dados jogador
   int score = 0;
   String apelido = '';
-
-  // Configuração Firebase
-  // FirebaseFirestore db = FirebaseFirestore.instance;
-
-  //  Controllers
   TextEditingController _controllerNome = TextEditingController();
 
   void saveScore() {
-    FirebaseFirestore.instance.collection('score').doc(apelido).set({'nome': apelido, 'ponto': score});
-  }
-
-  void hideBear() {
-
-    FirebaseFirestore.instance.collection('bear').doc('hideBear').set({'hide': hideBer});
+    if (!apelido.contains('caracters') && apelido != null) {
+      FirebaseFirestore.instance
+          .collection('score')
+          .doc(apelido)
+          .set({'nome': apelido, 'ponto': score});
+    }
   }
 
   void validarCampos() {
@@ -63,8 +54,9 @@ class _MobileState extends State<Mobile> {
     final preferentes = await SharedPreferences.getInstance();
 
     final sharedPreferencesHelper = SharedPreferencesHelper(preferentes);
-    sharedPreferencesHelper.setString("userName", name);
+    await sharedPreferencesHelper.setString("userName", name);
     score = 0;
+
     getUserName();
   }
 
@@ -72,20 +64,13 @@ class _MobileState extends State<Mobile> {
     scanner.getCode.listen(
       (result) {
         if (result == "QR Code") {
+          score = score + 1;
+          print('score ${score}');
+          saveScore();
           setState(() {
-            score++;
             hideBer = !hideBer;
-            saveScore();
-            hideBear();
-
           });
-
-
         }
-        print('QRCODE: ${result}');
-        setState(
-          () {},
-        );
       },
     );
   }
@@ -93,7 +78,7 @@ class _MobileState extends State<Mobile> {
   @override
   void dispose() {
     scanner.dispose();
-    // super.dispose();
+    super.dispose();
   }
 
   @override
@@ -103,7 +88,6 @@ class _MobileState extends State<Mobile> {
     getUserName();
     _onDecode();
     super.initState();
-
   }
 
   @override

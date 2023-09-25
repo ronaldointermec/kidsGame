@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class QRCode extends StatelessWidget {
+class Avatar extends StatelessWidget {
   final x;
   final y;
   final visible;
 
-  const QRCode({super.key, this.x, this.y, this.visible});
+  const Avatar({super.key, this.x, this.y, this.visible});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +15,8 @@ class QRCode extends StatelessWidget {
             alignment: Alignment(x, y),
             child: Image.asset(
               "imagens/bear.png",
-              width: 180,
-              height: 180,
+              width: 400,
+              height: 400,
             ),
           )
         : const Center();

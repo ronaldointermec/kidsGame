@@ -4,10 +4,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:game/mobile.dart';
-import 'package:game/qrcode.dart';
+import 'package:game/avatar.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:game/score.dart';
+import 'package:game/ranking.dart';
+import 'package:game/sharedPreferencesHelper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -46,7 +48,7 @@ class _HomePageState extends State<HomePage> {
 
   void hideBear() {
     setState(() {
-      db.collection('bear').snapshots().listen((event) {
+      db.collection('score').snapshots().listen((event) {
         setState(() {
           visible = false;
           startGame();
@@ -54,6 +56,17 @@ class _HomePageState extends State<HomePage> {
         });
       });
     });
+  }
+
+  void deleteAllScores() async {
+
+    final CollectionReference collectionReference = db.collection('score');
+
+    QuerySnapshot querySnapshot = await collectionReference.get();
+
+    for (QueryDocumentSnapshot queryDocumentSnapshot in querySnapshot.docs) {
+      await queryDocumentSnapshot.reference.delete();
+    }
   }
 
   void stopGame() {
@@ -84,27 +97,28 @@ class _HomePageState extends State<HomePage> {
                 setState(() {
                   stopGame();
                 });
+              } else if (event.isKeyPressed(LogicalKeyboardKey.delete)) {
+                deleteAllScores();
               }
             },
             child: Scaffold(
-               backgroundColor: Colors.grey[900],
+              backgroundColor: Colors.grey[900],
               body: Container(
                 decoration: const BoxDecoration(
-                     image: DecorationImage(
-                   image: AssetImage("imagens/background.jpg"),
+                    image: DecorationImage(
+                  image: AssetImage("imagens/background.jpg"),
                   fit: BoxFit.cover,
-                 )
-                 ),
+                )),
                 child: Center(
                   child: Stack(
                     // alignment: Alignment.center,
                     children: [
-                      QRCode(
+                      Avatar(
                         x: x,
                         y: y,
                         visible: visible,
                       ),
-                      Positioned( bottom: 0,right: 0, child: Score())
+                      Positioned(bottom: 0, right: 0, child: Ranking())
                     ],
                   ),
                 ),

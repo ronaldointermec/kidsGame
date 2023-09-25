@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:game/firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-class Score extends StatefulWidget {
-  const Score({Key? key}) : super(key: key);
+class Ranking extends StatefulWidget {
+  const Ranking({Key? key}) : super(key: key);
 
   @override
-  State<Score> createState() => _ScoreState();
+  State<Ranking> createState() => _RankingState();
 }
 
-class _ScoreState extends State<Score> {
+class _RankingState extends State<Ranking> {
+
   final Stream<QuerySnapshot> _scoreStream = FirebaseFirestore.instance
       .collection('score')
       .orderBy('ponto', descending: true)
@@ -22,7 +21,7 @@ class _ScoreState extends State<Score> {
     return Container(
       //color: Colors.white,
       width: 300,
-      height: 200,
+      height: 800,
       child: StreamBuilder<QuerySnapshot>(
         stream: _scoreStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -40,7 +39,7 @@ class _ScoreState extends State<Score> {
                   document.data()! as Map<String, dynamic>;
               return ListTile(
                 title: Text(
-                  data['nome'] + ' - ' + data['ponto'].toString(),
+                  data['nome'] + ' : ' + data['ponto'].toString(),
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 30,
