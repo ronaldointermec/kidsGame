@@ -65,7 +65,6 @@ class _MobileState extends State<Mobile> {
       (result) {
         if (result == "QR Code") {
           score = score + 1;
-          print('score ${score}');
           saveScore();
           setState(() {
             hideBer = !hideBer;

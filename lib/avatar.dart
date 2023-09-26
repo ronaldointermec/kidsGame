@@ -11,7 +11,7 @@ class Avatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return visible
         ? AnimatedContainer(
-            duration: Duration(seconds: 2),
+            duration: Duration(seconds: 1),
             alignment: Alignment(x, y),
             child: Image.asset(
               "imagens/bear.png",
