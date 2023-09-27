@@ -1,0 +1,15 @@
+version: "2"
+
+services:
+  game:
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"  
+    restart: always
+    container_name: game
+    build: 
+      dockerfile: ../game/Dockerfile
+      context: ../game/
+    ports:
+      - 8080:80

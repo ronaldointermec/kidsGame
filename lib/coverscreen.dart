@@ -10,7 +10,7 @@ class ConverScreen extends StatelessWidget {
     return Container(
       alignment: Alignment(0, -0.2),
       child: Text(
-        gameHasStarted ? "" : 'C L I Q U E  P A R A  J O G A R',
+        gameHasStarted ? "" : ' " E N T E R "  P A R A  J O G A R',
         style: TextStyle(color: Colors.white, fontSize: 50),
       ),
     );

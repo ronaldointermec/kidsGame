@@ -121,19 +121,20 @@ class _HomePageState extends State<HomePage> {
     return kIsWeb
         ? GestureDetector(
       onTap: (){
-        gameHasStarted = true;
-        startTimer();
+        // gameHasStarted = true;
+        // startTimer();
       },
           child: RawKeyboardListener(
               focusNode: FocusNode(),
               autofocus: true,
               onKey: (event) {
                 if (event.isKeyPressed(LogicalKeyboardKey.space)) {
-
-                } else if (event.isKeyPressed(LogicalKeyboardKey.enter)) {
                   setState(() {
                     stopGame();
                   });
+                } else if (event.isKeyPressed(LogicalKeyboardKey.enter)) {
+                  gameHasStarted = true;
+                  startTimer();
                 } else if (event.isKeyPressed(LogicalKeyboardKey.delete)) {
                   deleteAllScores();
                 }

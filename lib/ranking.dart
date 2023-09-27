@@ -55,10 +55,9 @@ class _RankingState extends State<Ranking> {
                     ),
                   ),
                   trailing: CircleAvatar(
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.amber,
                     child: Text(data['ponto'].toString(),
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: const TextStyle(                          color: Colors.white,
                           fontSize: 20,
                         )),
                   ),
