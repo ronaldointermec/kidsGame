@@ -10,7 +10,7 @@ class _RankingState extends State<Ranking> {
   final Stream<QuerySnapshot> _scoreStream = FirebaseFirestore.instance
       .collection('score')
       .orderBy('ponto', descending: true)
-      .limit(20)
+      .limit(30)
       .snapshots();
 
   @override

@@ -116,6 +116,35 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+
+  void _showDialog(BuildContext context, String title, String content) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: [
+            TextButton(
+              onPressed: () {
+                deleteAllScores();
+                Navigator.of(context).pop();
+              },
+              child: Text('Sim'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Close the dialog
+                Navigator.of(context).pop();
+              },
+              child: Text('Não'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return kIsWeb
@@ -136,7 +165,8 @@ class _HomePageState extends State<HomePage> {
                   gameHasStarted = true;
                   startTimer();
                 } else if (event.isKeyPressed(LogicalKeyboardKey.delete)) {
-                  deleteAllScores();
+                  //deleteAllScores();
+                  _showDialog(context, "Confirmação", "Deseja excluir todos os pontos?" );
                 }
               },
               child: Scaffold(
