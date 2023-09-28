@@ -16,6 +16,7 @@ class _MobileState extends State<Mobile> {
   bool hideBer = false;
   int score = 0;
   String apelido = '';
+  String error = '';
   TextEditingController _controllerNome = TextEditingController();
 
   void saveScore() {
@@ -33,9 +34,13 @@ class _MobileState extends State<Mobile> {
 
     if (nome.length > 3) {
       setUserName(nome);
+      _controllerNome.text = '';
+      setState(() {
+        error = '';
+      });
     } else {
       setState(() {
-        apelido = 'O apelido precisa ter mais de 3 caracters';
+        error = 'O apelido precisa ter mais de 3 caracters';
       });
     }
   }
@@ -92,6 +97,29 @@ class _MobileState extends State<Mobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Olá, ' + apelido),
+        elevation: 0,
+        backgroundColor: Color(0xFF075E54),
+        actions: [
+          CircleAvatar(
+            backgroundColor: Color(0xFF075E54),
+            child: Text(score.toString(),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold)),
+          ),
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              setState(() {
+                score = 0;
+              });
+            },
+          ),
+        ],
+      ),
       body: Container(
         decoration: BoxDecoration(color: Color(0xFF075E54)),
         padding: EdgeInsets.all(16),
@@ -111,7 +139,7 @@ class _MobileState extends State<Mobile> {
                 Center(
                   child: Padding(
                     padding: EdgeInsets.all(16),
-                    child: Text(this.apelido,
+                    child: Text(error,
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 28,
