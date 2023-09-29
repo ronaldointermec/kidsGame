@@ -72,8 +72,7 @@ class _HomePageState extends State<HomePage> {
       db.collection('score').snapshots().listen((event) {
         setState(() {
           isAvatarVisible = false;
-          // startGame();
-          gameHasStarted = true;
+
         });
       });
     });

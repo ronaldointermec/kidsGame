@@ -22,7 +22,7 @@ class _RankingState extends State<Ranking> {
         width: 300,
         height: 300,
         decoration: BoxDecoration(
-            color: Colors.black87.withOpacity(0.2),
+            color: Colors.black87.withOpacity(0.1),
             borderRadius: BorderRadius.circular(20)),
         child: StreamBuilder<QuerySnapshot>(
           stream: _scoreStream,
