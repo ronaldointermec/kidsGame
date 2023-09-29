@@ -26,10 +26,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - imagens/logo.png
     - imagens/bear.png
     - imagens/background.jpg
-
 
   # fonts:
   #   - family: Schyler
