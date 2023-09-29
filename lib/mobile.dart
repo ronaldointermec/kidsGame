@@ -60,7 +60,10 @@ class _MobileState extends State<Mobile> {
 
     final sharedPreferencesHelper = SharedPreferencesHelper(preferentes);
     await sharedPreferencesHelper.setString("userName", name);
-    score = 0;
+
+    setState(() {
+      score = 0;
+    });
 
     getUserName();
   }
