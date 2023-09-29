@@ -22,7 +22,7 @@ class _RankingState extends State<Ranking> {
         width: 300,
         height: 300,
         decoration: BoxDecoration(
-            color: Colors.transparent,
+            color: Colors.black87.withOpacity(0.2),
             borderRadius: BorderRadius.circular(20)),
         child: StreamBuilder<QuerySnapshot>(
           stream: _scoreStream,
@@ -50,14 +50,15 @@ class _RankingState extends State<Ranking> {
                   title: Text(
                     data['nome'],
                     style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
+                      color: Colors.white,
+                      fontSize: 28,
                     ),
                   ),
                   trailing: CircleAvatar(
                     backgroundColor: Colors.amber,
                     child: Text(data['ponto'].toString(),
-                        style: const TextStyle(                          color: Colors.white,
+                        style: const TextStyle(
+                          color: Colors.white,
                           fontSize: 20,
                         )),
                   ),

@@ -15,8 +15,8 @@ class Avatar extends StatelessWidget {
             alignment: Alignment(x, y),
             child: Image.asset(
               "imagens/bear.png",
-              width: 220,
-              height: 220,
+              width: 230,
+              height: 230,
             ),
           )
         : const Center();
