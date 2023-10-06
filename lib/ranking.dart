@@ -7,6 +7,7 @@ class Ranking extends StatefulWidget {
 }
 
 class _RankingState extends State<Ranking> {
+
   final Stream<QuerySnapshot> _scoreStream = FirebaseFirestore.instance
       .collection('score')
       .orderBy('ponto', descending: true)
